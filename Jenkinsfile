@@ -1,10 +1,9 @@
 pipeline {
     agent any
     environment {
-        // REPLACE with your actual DockerHub username 
         DOCKERHUB_USERNAME = 'aswathy486'
         IMAGE_NAME = "devops-challenge-1-flask"
-        DOCKER_CREDENTIAL_ID = 'docker-hub-creds' // Match this ID to the one you would set in Jenkins
+        DOCKER_CREDENTIAL_ID = 'docker-hub-creds'
     }
 
     stages {
@@ -18,8 +17,6 @@ pipeline {
                 }
             }
         }
-
-        // 2. Test Stage – Run a basic test (e.g., pytest). [cite: 4]
         stage('Test') {
             steps {
                 echo 'Running mock tests...'
@@ -30,7 +27,6 @@ pipeline {
             }
         }
 
-        // 3. Push Stage – Push Docker image to your DockerHub account. [cite: 4]
         stage('Push Image') {
             steps {
                 echo "Pushing image to DockerHub as: ${DOCKERHUB_USERNAME}/${IMAGE_NAME}:latest"
@@ -43,7 +39,6 @@ pipeline {
             }
         }
 
-        // 4. Deploy Stage – Deploy the container locally (run with docker run). [cite: 5]
         stage('Deploy Locally') {
             steps {
                 echo 'Deploying container locally...'
